@@ -136,38 +136,62 @@ namespace HoloToolkit.Unity.InputModule
             Vector3 handPosition1;
 
             {
-                Vector3 gazeHitPosition = GazeManager.Instance.HitInfo.point;
-                Vector3 handPosition;
-                inputSource0.TryGetPosition(inputSourceId0, out handPosition);
+                Vector3 newHandPosition;
+                inputSource0.TryGetPosition(inputSourceId0, out newHandPosition);
 
+                handPosition1 = newHandPosition;
+
+
+                /*
                 Vector3 pivotPosition = GetHandPivotPosition();
-                handRefDistance = Vector3.Magnitude(handPosition - pivotPosition);
-                objRefDistance = Vector3.Magnitude(gazeHitPosition - pivotPosition);
 
-                Vector3 objForward = HostTransform.forward;
-                Vector3 objUp = HostTransform.up;
+                Vector3 newHandDirection = Vector3.Normalize(newHandPosition - pivotPosition);
 
-                // Store where the object was grabbed from
-                handPosition0 = mainCamera.transform.InverseTransformDirection(HostTransform.position - gazeHitPosition);
+                newHandDirection = mainCamera.transform.InverseTransformDirection(newHandDirection); // in camera space
+                Vector3 targetDirection = Vector3.Normalize(gazeAngularOffset * newHandDirection);
+                targetDirection = mainCamera.transform.TransformDirection(targetDirection); // back to world space
+
+                float currenthandDistance = Vector3.Magnitude(newHandPosition - pivotPosition);
+
+                float distanceRatio = currenthandDistance / handRefDistance;
+                float distanceOffset = distanceRatio > 0 ? (distanceRatio - 1f) * DistanceScale : 0;
+                float targetDistance = objRefDistance + distanceOffset;
+
+                handsPositions[inputSourceId0] = pivotPosition + (targetDirection * targetDistance);
+                handPosition0 = handsPositions[inputSourceId0];
+                */
             }
 
             {
-                Vector3 gazeHitPosition = GazeManager.Instance.HitInfo.point;
-                Vector3 handPosition;
-                inputSource1.TryGetPosition(inputSourceId1, out handPosition);
+                Vector3 newHandPosition;
+                inputSource1.TryGetPosition(inputSourceId1, out newHandPosition);
 
+                handPosition0 = newHandPosition;
+                /*
                 Vector3 pivotPosition = GetHandPivotPosition();
-                handRefDistance = Vector3.Magnitude(handPosition - pivotPosition);
-                objRefDistance = Vector3.Magnitude(gazeHitPosition - pivotPosition);
 
-                Vector3 objForward = HostTransform.forward;
-                Vector3 objUp = HostTransform.up;
+                Vector3 newHandDirection = Vector3.Normalize(newHandPosition - pivotPosition);
 
-                // Store where the object was grabbed from
-                handPosition1 = mainCamera.transform.InverseTransformDirection(HostTransform.position - gazeHitPosition);
+                newHandDirection = mainCamera.transform.InverseTransformDirection(newHandDirection); // in camera space
+                Vector3 targetDirection = Vector3.Normalize(gazeAngularOffset * newHandDirection);
+                targetDirection = mainCamera.transform.TransformDirection(targetDirection); // back to world space
+
+                float currenthandDistance = Vector3.Magnitude(newHandPosition - pivotPosition);
+
+                float distanceRatio = currenthandDistance / handRefDistance;
+                float distanceOffset = distanceRatio > 0 ? (distanceRatio - 1f) * DistanceScale : 0;
+                float targetDistance = objRefDistance + distanceOffset;
+
+                handsPositions[inputSourceId1] = pivotPosition + (targetDirection * targetDistance);
+
+                handPosition1 = handsPositions[inputSourceId1];
+                */
             }
 
             float currentDist = Vector3.Distance(handPosition0, handPosition1);
+
+            Debug.Log("Current dist is " + currentDist);
+            Debug.Log("Referenec dist is" + handRefDistance);
             float scale = currentDist / handRefDistance;
 
             HostTransform.localScale = new Vector3(HostTransform.localScale.x * scale, HostTransform.localScale.y, HostTransform.localScale.z * scale);
@@ -209,6 +233,8 @@ namespace HoloToolkit.Unity.InputModule
                 Vector3 gazeHitPosition = GazeManager.Instance.HitInfo.point;
                 Vector3 handPosition;
                 inputSource0.TryGetPosition(inputSourceId0, out handPosition);
+                handPosition0 = handPosition;
+                /*
 
                 Vector3 pivotPosition = GetHandPivotPosition();
                 handRefDistance = Vector3.Magnitude(handPosition - pivotPosition);
@@ -219,13 +245,16 @@ namespace HoloToolkit.Unity.InputModule
 
                 // Store where the object was grabbed from
                 handPosition0 = mainCamera.transform.InverseTransformDirection(HostTransform.position - gazeHitPosition);
+                */
             }
 
             {
                 Vector3 gazeHitPosition = GazeManager.Instance.HitInfo.point;
                 Vector3 handPosition;
                 inputSource1.TryGetPosition(inputSourceId1, out handPosition);
+                handPosition1 = handPosition;
 
+                /*
                 Vector3 pivotPosition = GetHandPivotPosition();
                 handRefDistance = Vector3.Magnitude(handPosition - pivotPosition);
                 objRefDistance = Vector3.Magnitude(gazeHitPosition - pivotPosition);
@@ -235,6 +264,7 @@ namespace HoloToolkit.Unity.InputModule
 
                 // Store where the object was grabbed from
                 handPosition1 = mainCamera.transform.InverseTransformDirection(HostTransform.position - gazeHitPosition);
+                */
             }
 
 
