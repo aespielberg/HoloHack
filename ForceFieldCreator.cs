@@ -29,7 +29,8 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
 
     public void OnInputDown(InputEventData eventData)
     {
-        if (!eventData.InputSource.SupportsInputInfo(eventData.SourceId, SupportedInputInfo.Position))
+
+            if (!eventData.InputSource.SupportsInputInfo(eventData.SourceId, SupportedInputInfo.Position))
         {
             // The input source must provide positional data for this script to be usable
             return;
@@ -49,6 +50,8 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
 
         //now spawn a point in that area:
         GameObject meshGameObject = (GameObject)Instantiate(cylinderPrefab);
+        HandDraggable handDraggable = meshGameObject.AddComponent<HandDraggable>(); //make it draggable
+        handDraggable.IsDraggingEnabled = true;
         /*
         MeshFilter subMeshFilter = meshGameObject.AddComponent<MeshFilter>();
         subMeshFilter.transform.position = handPosition;
