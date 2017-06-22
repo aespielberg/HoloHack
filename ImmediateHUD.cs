@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ImmediateHUD : Singleton<ImmediateHUD> {
 
+    public GUIStyle makeItPretty;
 
     void OnGUI()
     {
         // Make a background box
-        GUI.Box(new Rect(10, 10, 200, 90), "Time Remaining: " + Scorekeeper.Instance.TimeRemaining);
-
+        GUI.Label(new Rect(10, 10, 200, 90), "Time Remaining: " + Scorekeeper.Instance.TimeRemaining, makeItPretty);
     }
 
     // Use this for initialization
