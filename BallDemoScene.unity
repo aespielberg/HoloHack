@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9d4bca6590318498673864d588fee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeRemaining: 3
 --- !u!1001 &1093818617
 Prefab:
   m_ObjectHideFlags: 0
@@ -623,7 +624,6 @@ GameObject:
   - component: {fileID: 1587549009}
   - component: {fileID: 1587549010}
   - component: {fileID: 1587549011}
-  - component: {fileID: 1587549012}
   - component: {fileID: 1587549013}
   m_Layer: 0
   m_Name: InteractionManagers
@@ -673,23 +673,6 @@ MonoBehaviour:
   maxNumForceFields: 5
   forceFieldLifeSpan: 100
   totalForceFieldArea: 10
---- !u!114 &1587549012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1587549008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d1a2a33ffcac354298137001635a001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxGazeCollisionDistance: 10
-  RaycastLayerMasks:
-  - serializedVersion: 2
-    m_Bits: 4294967291
-  Stabilizer: {fileID: 0}
-  GazeTransform: {fileID: 0}
 --- !u!114 &1587549013
 MonoBehaviour:
   m_ObjectHideFlags: 0
