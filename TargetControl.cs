@@ -22,6 +22,7 @@ public class TargetControl : MonoBehaviour {
         //Debug.Break();
         if (collision.collider.CompareTag("Target"))
         {
+            Debug.Log("OW");
             Scorekeeper.Instance.Demerit();
         }
 

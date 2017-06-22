@@ -199,9 +199,9 @@ namespace HoloToolkit.Unity.InputModule
             handsPositions[inputSourceId0] = handPosition0;
             handsPositions[inputSourceId1] = handPosition1;
 
-            if (scale > 1.0f && ForceFieldCreator.Instance.CurrentTotalForceFieldArea >= ForceFieldCreator.Instance.totalForceFieldArea)
+            if (scale > 1.0f && ForceFieldCreator.Instance.CurrentTotalForceFieldArea >= ForceFieldCreator.Instance.totalForceFieldArea || scale < 0.1f)
             {
-                return; //don't make it any bigger
+                return; //don't make it any bigger or smaller than a minimum amount
             }
             //otherwise we can make it bigger
 

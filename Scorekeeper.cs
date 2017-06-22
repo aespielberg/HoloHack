@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Scorekeeper : Singleton<Scorekeeper> {
 
     private int timeRemaining = 300;
-    private int lifeRemaining = 10;
+    public int lifeRemaining = 3;
 
     public int TimeRemaining { get { return timeRemaining; } }
 
@@ -19,7 +20,7 @@ public class Scorekeeper : Singleton<Scorekeeper> {
 	void Update () {
 		if (timeRemaining <=0 || lifeRemaining <= 0)
         {
-            //TODO: load game over screen
+            SceneManager.LoadScene("gameover", LoadSceneMode.Single);
         }
 	}
 
