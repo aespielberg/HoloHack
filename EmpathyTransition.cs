@@ -25,6 +25,6 @@ public class EmpathyTransition : MonoBehaviour
 
     void EmpathyTransitionClick()
     {
-        SceneManager.LoadScene("BallDemoScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 }
