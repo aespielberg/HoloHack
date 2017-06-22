@@ -26,6 +26,7 @@ public class BallShooter : Singleton<BallShooter>
             //clone.velocity = transform.forward * 10f;
             clone.velocity = new Vector3(Random.value - 0.5f, Random.value - 0.5f, Random.value - 0.5f) * velocity;
             clone.position = new Vector3(0.0f, 0.0f, 1.0f);
+            clone.tag = "Target";
             Destroy(clone.gameObject, 30);
         }
     }

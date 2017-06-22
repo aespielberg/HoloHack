@@ -20,7 +20,7 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
 
     private uint currentInputSourceId;
     public GameObject cylinderPrefab;
-    public int maxNumForceFields = 5;
+    public int maxNumForceFields = 100;
     public int forceFieldLifeSpan = 30;
     public float totalForceFieldArea = 10f;
     private const float startArea = 0.25f * (float)Math.PI;
