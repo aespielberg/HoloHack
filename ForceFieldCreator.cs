@@ -72,7 +72,7 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
             subMeshRenderer.materials[0] = material;
             */
 
-            meshGameObject.transform.localScale = new Vector3(0.1f, 0.01f, 0.1f);
+            meshGameObject.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
             meshGameObject.transform.localPosition = handPosition;
 
 
