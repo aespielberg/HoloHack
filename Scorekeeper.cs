@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Scorekeeper : Singleton<Scorekeeper> {
 
-    private int timeRemaining = 300;
+    private int timeRemaining = 60;
     public int lifeRemaining = 3;
 
     public int TimeRemaining { get { return timeRemaining; } }
@@ -18,9 +18,12 @@ public class Scorekeeper : Singleton<Scorekeeper> {
 	
 	// Update is called once per frame
 	void Update () {
-		if (timeRemaining <=0 || lifeRemaining <= 0)
+		if (lifeRemaining <= 0)
         {
             SceneManager.LoadScene("gameover", LoadSceneMode.Single);
+        }else if (timeRemaining <= 0)
+        {
+            SceneManager.LoadScene("winnerv3", LoadSceneMode.Single);
         }
 	}
 
