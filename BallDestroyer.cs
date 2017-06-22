@@ -13,4 +13,9 @@ public class BallDestroyer : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void OnDestroy()
+    {
+        ForceFieldCreator.Instance.DecrementForceFieldCount();
+    }
 }
