@@ -554,7 +554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cylinderPrefab: {fileID: 179072810}
   maxNumForceFields: 5
-  forceFieldLifeSpan: 10
+  forceFieldLifeSpan: 100
 --- !u!114 &1587549012
 MonoBehaviour:
   m_ObjectHideFlags: 0

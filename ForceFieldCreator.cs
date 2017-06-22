@@ -22,7 +22,7 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
     private uint currentInputSourceId;
     public GameObject cylinderPrefab;
     public int maxNumForceFields = 5;
-    public int forceFieldLifeSpan = 10;
+    public int forceFieldLifeSpan = 100;
 
     //TODO: re-org into start paint and end paint functions?
 
@@ -60,8 +60,8 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
         if (this.totalNumForceFields < this.maxNumForceFields)
         {
             GameObject meshGameObject = (GameObject)Instantiate(cylinderPrefab);
-            HandDraggable handDraggable = meshGameObject.AddComponent<HandDraggable>(); //make it draggable
-            handDraggable.IsDraggingEnabled = true;
+            HandDraggableAndScalable handDraggable = meshGameObject.AddComponent<HandDraggableAndScalable>(); //make it draggable
+            handDraggable.IsDraggingAndScalingEnabled = true;
             this.totalNumForceFields++;
             Destroy(meshGameObject, forceFieldLifeSpan);
             /*
