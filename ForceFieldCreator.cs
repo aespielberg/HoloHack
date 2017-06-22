@@ -9,12 +9,20 @@ using HoloToolkit.Unity;
 
 public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, ISourceStateHandler
 {
+    private int totalNumForceFields;
 
 
-    private bool isPainting;
     private IInputSource currentInputSource;
+
+    internal void DecrementForceFieldCount()
+    {
+        this.totalNumForceFields--;
+    }
+
     private uint currentInputSourceId;
     public GameObject cylinderPrefab;
+    public int maxNumForceFields = 5;
+    public int forceFieldLifeSpan = 10;
 
     //TODO: re-org into start paint and end paint functions?
 
@@ -30,7 +38,7 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
     public void OnInputDown(InputEventData eventData)
     {
 
-            if (!eventData.InputSource.SupportsInputInfo(eventData.SourceId, SupportedInputInfo.Position))
+        if (!eventData.InputSource.SupportsInputInfo(eventData.SourceId, SupportedInputInfo.Position))
         {
             // The input source must provide positional data for this script to be usable
             return;
@@ -49,23 +57,27 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
 
 
         //now spawn a point in that area:
-        GameObject meshGameObject = (GameObject)Instantiate(cylinderPrefab);
-        HandDraggable handDraggable = meshGameObject.AddComponent<HandDraggable>(); //make it draggable
-        handDraggable.IsDraggingEnabled = true;
-        /*
-        MeshFilter subMeshFilter = meshGameObject.AddComponent<MeshFilter>();
-        subMeshFilter.transform.position = handPosition;
-        subMeshFilter.mesh = mesh;
-        MeshRenderer subMeshRenderer = meshGameObject.AddComponent<MeshRenderer>();
-        subMeshRenderer.materials[0] = material;
-        */
+        if (this.totalNumForceFields < this.maxNumForceFields)
+        {
+            GameObject meshGameObject = (GameObject)Instantiate(cylinderPrefab);
+            HandDraggable handDraggable = meshGameObject.AddComponent<HandDraggable>(); //make it draggable
+            handDraggable.IsDraggingEnabled = true;
+            this.totalNumForceFields++;
+            Destroy(meshGameObject, forceFieldLifeSpan);
+            /*
+            MeshFilter subMeshFilter = meshGameObject.AddComponent<MeshFilter>();
+            subMeshFilter.transform.position = handPosition;
+            subMeshFilter.mesh = mesh;
+            MeshRenderer subMeshRenderer = meshGameObject.AddComponent<MeshRenderer>();
+            subMeshRenderer.materials[0] = material;
+            */
 
-        meshGameObject.transform.localScale = new Vector3(0.1f, 0.01f, 0.1f);
-        meshGameObject.transform.localPosition = handPosition;
+            meshGameObject.transform.localScale = new Vector3(0.1f, 0.01f, 0.1f);
+            meshGameObject.transform.localPosition = handPosition;
 
 
-        subMeshes.Add(meshGameObject);
-
+            subMeshes.Add(meshGameObject);
+        }
     }
 
     public void OnInputUp(InputEventData eventData)
@@ -117,9 +129,9 @@ public class ForceFieldCreator : Singleton<ForceFieldCreator>, IInputHandler, IS
 
     public ForceFieldCreator()
     {
-        isPainting = false;
         currentInputSource = null;
         currentInputSourceId = 0;
+        this.totalNumForceFields = 0;
     }
 
 }
