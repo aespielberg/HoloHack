@@ -505,7 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025652ca748c226419054a8f4b820992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cylinderPrefab: {fileID: 0}
+  cylinderPrefab: {fileID: 1824078515307382, guid: e8601c551a94ee946819fff3d285ad99,
+    type: 2}
   maxNumForceFields: 5
   forceFieldLifeSpan: 100
 --- !u!114 &1587549012

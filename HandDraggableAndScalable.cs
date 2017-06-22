@@ -194,11 +194,21 @@ namespace HoloToolkit.Unity.InputModule
             Debug.Log("Referenec dist is" + handRefDistance);
             float scale = currentDist / handRefDistance;
 
+
+            //What's our current scale compared to limit?
+            handsPositions[inputSourceId0] = handPosition0;
+            handsPositions[inputSourceId1] = handPosition1;
+
+            if (scale > 1.0f && ForceFieldCreator.Instance.CurrentTotalForceFieldArea >= ForceFieldCreator.Instance.totalForceFieldArea)
+            {
+                return; //don't make it any bigger
+            }
+            //otherwise we can make it bigger
+
             HostTransform.localScale = new Vector3(HostTransform.localScale.x * scale, HostTransform.localScale.y, HostTransform.localScale.z * scale);
 
 
-            handsPositions[inputSourceId0] = handPosition0;
-            handsPositions[inputSourceId1] = handPosition1;
+            
         }
 
         public void StartScaling()
